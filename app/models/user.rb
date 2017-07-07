@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   
   def has_role?
     if self.role.present? 
-      self.role.name == "admin"
+      self.role.name == "Admin"
     else 
       false
     end

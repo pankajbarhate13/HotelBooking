@@ -11,7 +11,7 @@ class Ability
     #     can :read, :all
     #   end
     # #
-    if user.has_role? :admin
+    if user.has_role?
       can :manage, :all
     else
       can :read, :all
