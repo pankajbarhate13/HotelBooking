@@ -1,0 +1,106 @@
+<%= form_for :booking, url: bookings_path do |f| %>
+  
+  <div class="field">
+    <%= f.label :full_name %><br>
+    <%= f.text_field :full_name, class: "form-control", placeholder: " Full Name", required: :require %>
+  </div>
+  <div class="field">
+    <%= f.label :address %><br>
+    <%= f.text_area :address, class: "form-control", placeholder: " Address", required: :require %>
+  </div>
+  <div class="field">
+    <%= f.label :phone_no %><br>
+    <%= f.text_field :phone_no, class: "form-control", placeholder: " Phone No", required: :require %>
+  </div>
+  <div class="field">
+    <%#= f.label :user_id %><br>
+    <%#= f.hidden_field_tag "user_id", current_user.id %>
+  </div>
+  <div class="field">
+    <%= f.label :room_id %><br>
+    <%= text_field_tag :room_id, "", class: "form-control", readonly: true %>
+    <%= f.hidden_field  :room_id %>
+
+  </div>
+  <%= f.hidden_field  :category_id %>
+  <div class="field">
+    <%= f.label :start_date %><br>
+    <%= f.text_field :start_date, class: "form-control", id:'datepicker3' %>
+    <!-- <div class='input-group date' id='datetimepicker3'>
+      <input type='text' class="form-control" name="start_date" />
+      <span class="input-group-addon">
+          <span class="glyphicon glyphicon-calendar"></span>
+      </span>
+    </div> -->
+  </div>
+  <div class="field">
+    <%= f.label :end_date %><br>
+    <%= f.text_field :end_date, class: "form-control", id:'datepicker4' %>
+    <!-- <div class='input-group date' id='datetimepicker4'>
+      <input type='text' class="form-control" name="end_date" />
+      <span class="input-group-addon">
+          <span class="glyphicon glyphicon-calendar"></span>
+      </span>
+    </div> -->
+  </div>
+  <div class="field">
+    <%= f.label :amount %><br>
+    <%= f.text_field :amount, class: "form-control", placeholder: " Amount", required: :require %>
+  </div>
+  
+
+  <div class="actions">
+    <%= f.submit class: "btn btn-success" %>
+  </div>
+<% end %>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script type="text/javascript">
+  
+
+  $(function () {
+    $("#datepicker3").datepicker({
+      minDate: 0,
+      maxDate: '+1Y+6M',
+      onSelect: function (dateStr) {
+          var min = $(this).datepicker('getDate'); // Get selected date
+          $("#TextBox2").datepicker('option', 'minDate', min || '0'); // Set other min, default to today
+      }
+    });
+
+    $("#datepicker4").datepicker({
+        minDate: '0',
+        maxDate: '+1Y+6M',
+        onSelect: function (dateStr) {
+            var max = $(this).datepicker('getDate'); // Get selected date
+            $('#datepicker').datepicker('option', 'maxDate', max || '+1Y+6M'); // Set other max, default to +18 months
+            var start = $("#datepicker3").datepicker("getDate");
+            var end = $("#datepicker4").datepicker("getDate");
+            var days = (end - start) / (1000 * 60 * 60 * 24);
+            // $("#booking_amount").val(days);
+            id = $("#booking_room_id").val();
+            $.ajax({
+              type: "GET",
+              url: '/bookings/' + id + '/amount/?days='+ days,
+              dataType: "json",
+              success: function(data){
+                  console.log('jhgdfsj')
+                  $("#booking_amount").val(data['amount']);
+                }
+
+            });
+        }
+    });
+
+    // $('#datetimepicker3').datetimepicker({
+    //     format: "YYYY-MM-DD LT",
+    //     sideBySide: true
+    // });
+    // $('#datetimepicker4').datetimepicker({
+    //     format: "YYYY-MM-DD LT",
+    //     sideBySide: true
+    // });
+  });
+</script>

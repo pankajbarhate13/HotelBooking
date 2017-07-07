@@ -1,0 +1,42 @@
+//colors
+$black:  black;
+
+.rooms {
+  width: 30%;
+  border: 1px solid $black;
+  display: inline-block;
+  padding: 15px;
+  margin: 10px;
+}
+.room_no {
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  padding-top: 20px;
+}
+#notice {
+  color: $black;
+}
+div {
+  &#datetimepicker5 {
+    width: 300px;
+  }
+  &#datetimepicker6 {
+    width: 300px;
+  }
+}
+.room_pic img {
+  width: 100%;
+  max-height: 300px;
+  min-height: 299px;
+}
+form#room_search {
+  width: 90%;
+  div {
+    display: inline-flex;
+    padding-right: 25px;
+  }
+  select {
+    margin-right: 25px;
+  }
+}

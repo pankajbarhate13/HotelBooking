@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: MyString
+  room_id: MyString
+  start_date: MyString
+  end_date: MyString
+  amount: MyString
+
+two:
+  user_id: MyString
+  room_id: MyString
+  start_date: MyString
+  end_date: MyString
+  amount: MyString

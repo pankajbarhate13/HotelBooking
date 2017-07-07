@@ -1,0 +1,62 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Bookings</h1>
+<div class="row">
+  <div class="">
+    <%= form_tag search_bookings_path, :method => 'get', :id => "room_search" do %>
+        <div class="">
+          <%= select_tag :category_id, options_from_collection_for_select(@cat, :id, :name), :prompt => "Select Category" , class: "form-control" %>
+        <div>
+        <div class='input-group date class=""' id='datetimepicker5'>
+            <input type='text' class="form-control" name="start_date" />
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+        </div>
+        <div class='input-group date class=""' id='datetimepicker6'>
+            <input type='text' class="form-control" name="end_date" />
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+        </div>
+        <div class="">
+           <%= submit_tag "Search", :name => nil, class: "btn btn-success btn-search" %>
+        </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <% @rooms.each_slice(3) do |room| %>
+    <% room.each do |r| %>
+      <div class="rooms">
+        <div class="room_pic">
+          <%= image_tag r.room_pic.url %>
+        </div>
+        <div class="room_no">
+          <%= r.floor %>
+        </div>
+      </div>
+    <% end %>
+    <% end %>
+  </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker5').datetimepicker({
+            format: "YYYY-MM-DD LT",
+            sideBySide: true
+        });
+        $('#datetimepicker6').datetimepicker({
+            format: "YYYY-MM-DD LT",
+            sideBySide: true
+        });
+    });
+</script>
+
+
+<style type="text/css">
+
+</style>
